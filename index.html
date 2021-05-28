@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<style>
+		
+	</style>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<title>Streams</title>
+	<h1 class="text-center">CrewBattle Maker</h1>
+</head>
+<body>
+
+  <div class="list container nav justify-content-center">
+    <div class="row heading nav-tabs nav-justified">
+        <div class="nav-item nav-link col-md-4 col-sm-4">
+          <h1>Crew One: </h1>
+        </div>
+          
+        <div class="nav-item nav-link col-md-4 col-sm-4 ">
+          <label for="CrewName1">Name: </label>
+          <input type="text"  id="CrewName1" placeholder="Crew Name" autocomplete="off">
+        </div>
+
+        <div class="nav-item nav-link col-md-4 col-sm-4 ">
+          <label for="Members1">Members: </label>
+      <textarea id="Members1" placeholder="Enter each member line by line"></textarea>
+        </div>
+      </div>
+    </div>
+
+    <div class="list container nav justify-content-center">
+    <div class="row heading nav-tabs nav-justified">
+        <div class="nav-item nav-link col-md-4 col-sm-4">
+          <h1>Crew Two: </h1>
+        </div>
+          
+        <div class="nav-item nav-link col-md-4 col-sm-4 ">
+          <label for="CrewName2">Name: </label>
+          <input type="text"  id="CrewName2" placeholder="Crew Name" autocomplete="off">
+        </div>
+
+        <div class="nav-item nav-link col-md-4 col-sm-4 ">
+          <label for="Members2">Members: </label>
+      <textarea id="Members2" placeholder="Enter each member line by line"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="list container nav justify-content-center">
+    <div class="row heading nav-tabs nav-justified">
+        <div class="nav-item nav-link col-md-6 col-sm-6 tab" data-toggle="tab">
+          <button class="btn btn-primary">Submit</button>
+        </div>
+          
+        <div class="nav-item nav-link col-md-6 col-sm-6 tab">
+          <button class="btn btn-danger">Reset</button>
+        </div>
+      </div>
+    </div>
+    <div class="error-message nav justify-content-center"></div>
+    <div class="error-message1 nav justify-content-center"></div>
+    <div class="error-message2 nav justify-content-center"></div>
+
+    <div class="preview nav justify-content-center">
+      <h3>Preview</h3>
+      <img src="https://images-na.ssl-images-amazon.com/images/I/71hjzCVrCmL._AC_SL1500_.jpg">  
+    </div>
+</body>
+<script>
+  var stocks=0;
+  
+
+  document.querySelector('.btn-primary').onclick = function(){
+    var errors=0;
+    document.querySelector(".error-message").innerHTML = "";
+    document.querySelector(".error-message1").innerHTML = "";
+    document.querySelector(".error-message2").innerHTML = "";
+    if(document.getElementById("Members1").value == '' || document.getElementById("Members2").value ==''){
+      document.querySelector(".error-message").innerHTML = "There are no member in the crew(s).";
+      errors++;
+    }
+
+
+    if(document.getElementById("CrewName1").value=='' || document.getElementById("CrewName2").value==''){
+      document.querySelector(".error-message1").innerHTML = "Crew Name(s) is/are empty.";
+      errors++;
+    }
+    var lines = document.getElementById("Members1").value.split('\n'); //fix inner method when back
+    
+    var crew1 = document.getElementById("Members1").value.split('\n');
+    var crew2 = document.getElementById("Members2").value.split('\n');
+    if(crew1.length!=crew2.length){
+      document.querySelector(".error-message2").innerHTML = "There are an uneven amount of crewmembers.";
+      errors++;
+    }
+    console.log(errors);
+    if (Boolean(errors>0)) {
+      console.log("errors found");
+      return;
+    }
+    console.log("Success");
+    
+  }
+  document.querySelector('.btn-danger').onclick = function clear(){
+    document.getElementById("Members1").value = '';
+    document.getElementById("Members2").value ='';
+    document.getElementById("CrewName1").value='';
+    document.getElementById("CrewName2").value='';
+
+    document.querySelector(".error-message").innerHTML = "";
+    document.querySelector(".error-message1").innerHTML = "";
+    document.querySelector(".error-message2").innerHTML = "";
+
+  }
+</script>
+</html>
+
+document.querySelector("").innerHTML = lines[0];
+    for(var i = 0;i < lines.length;i++){
+      document.querySelector("").innerHTML = document.querySelector(".error-message").innerHTML + "<br>" + lines[i];
+       
+    }
+
+document.querySelector(".error-message").innerHTML = lines[0];
+    for(var i = 0;i < lines.length;i++){
+      document.querySelector(".error-message").innerHTML = document.querySelector(".error-message").innerHTML + "<br>" + lines[i];
+    }

@@ -90,15 +90,15 @@
           <h1 class=" c1score"></h1>
         </div>
         <div class="nav justify-content-center col-md-1 col-sm-1 ">
-          <h1 class="player player1">DryGuy</h1>
-          <div class="stocks stocks1">1 2 3</div>
+          <h1 class="player player1"></h1>
+
         </div>
         <div class="nav justify-content-center col-md-1 col-sm-1 ">
 
         </div>
         <div class="nav justify-content-center col-md-1 col-sm-1 ">
-          <h1 class="player player2">Yami</h1>
-          <div class="stocks stocks2">1 2 3</div>
+          <h1 class="player player2"></h1>
+
         </div>
         <div class="nav justify-content-center col-md-1 col-sm-1">
           <h1 class=" c2score"></h1>
@@ -214,6 +214,8 @@ document.querySelector(".new-link").onclick = function(){//When you click the hr
     document.querySelector('.c2score').innerHTML = c2stocks.toString();
     document.querySelector('.Team1').innerHTML = document.getElementById("CrewName1").value;
     document.querySelector('.Team2').innerHTML = document.getElementById("CrewName2").value;
+    document.querySelector('.player1').innerHTML = document.getElementById("CrewName1").value;
+    document.querySelector('.player2').innerHTML = document.getElementById("CrewName2").value;
 
     for (var i = 0; i<crew1.length; i++) {
       document.querySelector('.Crewbattle-crew1').innerHTML = document.querySelector('.Crewbattle-crew1').innerHTML + "<div class='Crewmember1."+i+"'>"+crew1[i]+": <select name='from1'><option value>Random</option><option value='Banjo-&-Kazooie'>Banjo & Kazooie</option><option value='Bayonetta'>Bayonetta</option><option value='Bowser'>Bowser</option><option value='Bowser-Jr'>Bowser Jr.</option><option value='Byleth'>Byleth</option><option value='Captain-Falcon'>Captain Falcon</option><option value='Chrom'>Chrom</option><option value='Cloud'>Cloud</option><option value='Corrin'>Corrin</option><option value='Daisy'>Daisy</option><option value='Dark-Pit'>Dark Pit</option><option value='Dark-Samus'>Dark Samus</option><option value='Diddy-Kong'>Diddy Kong</option><option value='Donkey-Kong'>Donkey Kong</option><option value='Dr-Mario'>Dr Mario</option><option value='Duck-Hunt'>Duck Hunt</option><option value='Falco'>Falco</option><option value='Fox'>Fox</option><option value='Ganondorf'>Ganondorf</option><option value='Greninja'>Greninja</option><option value='Hero'>Hero</option><option value='Ice-Climbers'>Ice Climbers</option><option value='Incineroar'>Incineroar</option><option value='Inkling'>Inkling</option><option value='Ike'>Ike</option><option value='Isabelle'>Isabelle</option><option value='Jigglypuff'>Jigglypuff</option><option value='Joker'>Joker</option><option value='Ken'>Ken</option><option value='King-DeDeDe'>King DeDeDe</option><option value='King-K-Rool'>King K Rool</option><option value='Kirby'>Kirby</option><option value='Link'>Link</option><option value='Little-Mac'>Little Mac</option><option value='Lucario'>Lucario</option><option value='Lucas'>Lucas</option><option value='Lucina'>Lucina</option><option value='Luigi'>Luigi</option><option value='Mario'>Mario</option><option value='Marth'>Marth</option><option value='Mega-Man'>Mega Man</option><option value='Meta-Knight'>Meta Knight</option><option value='Mewtwo'>Mewtwo</option><option value='Mii-Fighter'>Mii Fighter</option><option value='Min-Min'>Min Min</option><option value='Mr-Game-&-Watch'>Mr Game & Watch</option><option value='Ness'>Ness</option><option value='Olimar'>Olimar</option><option value='Pac-Man'>Pac Man</option><option value='Palutena'>Palutena</option><option value='Peach'>Peach</option><option value='Pichu'>Pichu</option><option value='Pikachu'>Pikachu</option><option value='Piranha Plant'>Piranha Plant</option><option value='Pit'>Pit</option><option value='Pokemon-Trainer'>Pokemon Trainer</option><option value='Pyra-Mythra'>Pyra/Mythra</option><option value='Richter'>Richter</option><option value='ROB'>ROB</option><option value='Robin'>Robin</option><option value='Rosalina'>Rosalina</option><option value='Roy'>Roy</option><option value='Ryu'>Ryu</option><option value='Samus'>Samus</option><option value='Sephiroth'>Sephiroth</option><option value='Sheik'>Sheik</option><option value='Shulk'>Shulk</option><option value='Simon'>Simon</option><option value='Snake'>Snake</option><option value='Sonic'>Sonic</option><option value='Steve'>Steve</option><option value='Terry'>Terry</option><option value='Toon Link'>Toon Link</option><option value='Villager'>Villager</option><option value='Wario'>Wario</option><option value='Wii-Fit-Trainer'>Wii Fit Trainer</option><option value='Wolf'>Wolf</option><option value='Yoshi'>Yoshi</option><option value='Young-Link'>Young Link</option><option value='Zelda'>Zelda</option><option value='Zero-Suit-Samus'>Zero Suit Samus</option></select></div>";

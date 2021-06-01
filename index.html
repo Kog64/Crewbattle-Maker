@@ -91,14 +91,14 @@
         </div>
         <div class="nav justify-content-center col-md-1 col-sm-1 ">
           <h1 class="player player1"></h1>
-
+          <div class="stocks stocks1">1 2 3</div>
         </div>
         <div class="nav justify-content-center col-md-1 col-sm-1 ">
 
         </div>
         <div class="nav justify-content-center col-md-1 col-sm-1 ">
           <h1 class="player player2"></h1>
-
+          <div class="stocks stocks2">1 2 3</div>
         </div>
         <div class="nav justify-content-center col-md-1 col-sm-1">
           <h1 class=" c2score"></h1>
@@ -117,9 +117,12 @@
         </div>
         </div>
     </div>
+    <div class="text-center cb-log"></div>
 </div>
 </body>
 <script>
+  var num=1;
+  var log= [];
   document.querySelector(".increment2").onclick= function(){
     var score = document.querySelector(".c2score").innerHTML;
     score++;
@@ -133,21 +136,74 @@
     document.querySelector(".c1score").innerHTML= score.toString();
   }
   document.querySelector(".decrement2").onclick= function(){
+    
+    if (log[log.length-1]==1) {
+      num++;
+
+      document.querySelector(".newStat").innerHTML = document.getElementById("CrewName1").value+ " has taken "+ num +" stock(s)!";
+    }
+    else{
+      num=1;
+      if (document.querySelector(".newStat") == null) {
+      document.querySelector(".cb-log").innerHTML=document.querySelector(".cb-log").innerHTML+"<div class='newStat'></div>";
+      document.querySelector(".newStat").innerHTML = document.getElementById("CrewName1").value+ " has taken "+ num +" stock(s)!";  
+      }
+      else{
+        document.querySelector(".newStat").className = "oldStat";
+        document.querySelector(".cb-log").innerHTML=document.querySelector(".cb-log").innerHTML+"<div class='newStat'></div>";
+        document.querySelector(".newStat").innerHTML = document.getElementById("CrewName1").value+ " has taken "+ num +" stock(s)!";
+      }
+      
+
+      
+    }
+    log.push(1);
+    console.log(log);
+    
+
+    //messess with the scores
     var score = document.querySelector(".c2score").innerHTML;
     score--;
     console.log(score);
     document.querySelector(".c2score").innerHTML= score.toString();
     if (score==0) {
       alert(document.getElementById("CrewName1").value +" has WON!!!")
+      document.querySelector(".decrement1").disabled = true;
+      document.querySelector(".decrement2").disabled = true;
+      document.querySelector(".increment2").disabled = true;
+      document.querySelector(".increment1").disabled = true;
     }
   }
   document.querySelector(".decrement1").onclick= function(){
+    if (log[log.length-1]==0) {
+      num++;
+
+      document.querySelector(".newStat").innerHTML = document.getElementById("CrewName2").value+ " has taken "+ num +" stock(s)!";
+    }
+    else{
+      num=1;
+      if (document.querySelector(".newStat") == null) {
+      document.querySelector(".cb-log").innerHTML=document.querySelector(".cb-log").innerHTML+"<div class='newStat'></div>";
+      document.querySelector(".newStat").innerHTML = document.getElementById("CrewName2").value+ " has taken "+ num +" stock(s)!";  
+      }
+      else{
+        document.querySelector(".newStat").className = "oldStat";
+        document.querySelector(".cb-log").innerHTML=document.querySelector(".cb-log").innerHTML+"<div class='newStat'></div>";
+        document.querySelector(".newStat").innerHTML = document.getElementById("CrewName2").value+ " has taken "+ num +" stock(s)!";
+      }
+    }
+    log.push(0);
+    
     var score = document.querySelector(".c1score").innerHTML;
     score--;
     console.log(score);
     document.querySelector(".c1score").innerHTML= score.toString();
     if (score==0) {
       alert(document.getElementById("CrewName2").value +" has WON!!!");
+      document.querySelector(".decrement1").disabled = true;
+      document.querySelector(".decrement2").disabled = true;
+      document.querySelector(".increment2").disabled = true;
+      document.querySelector(".increment1").disabled = true;
     }
   }
 

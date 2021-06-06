@@ -1,285 +1,97 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<style>
-		
-	</style>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-	<title>Streams</title>
-	<h1 class="text-center">CrewBattle Maker</h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Crew Battle</title>
+
+    <script src="./script.js" defer></script>
 </head>
+
 <body>
-<div id="Page1">
-  <div class="list container nav justify-content-center">
-    <div class="row heading nav-tabs nav-justified">
-        <div class="nav-item nav-link col-md-4 col-sm-4">
-          <h1>Crew One: </h1>
-        </div>
-          
-        <div class="nav-item nav-link col-md-4 col-sm-4 ">
-          <label for="CrewName1">Name: </label>
-          <input type="text"  id="CrewName1" placeholder="Crew Name" autocomplete="off">
+    <div id="crew-setup" class="page active">
+        <h1 class="page-header">Crew Battle Maker</h1>
+        <div id="crew-one-setup" class="crew one">
+            <h1 class="crew-name">Crew One</h1>
+            <br>
+            <label for="crew-one-name">Name:</label>
+            <br>
+            <input oninput="updatePreviews()" type="text" id="crew-one-name" placeholder="Crew Name" autocomplete="off">
+            <br><br>
+            <label for="crew-one-members">Members:</label>
+            <br>
+            <textarea oninput="updatePreviews()" id="crew-one-members" placeholder="Enter each member line by line"></textarea>
         </div>
 
-        <div class="nav-item nav-link col-md-4 col-sm-4 ">
-          <label for="Members1">Members: </label>
-      <textarea id="Members1" placeholder="Enter each member line by line"></textarea>
+        <div id="crew-two-setup" class="crew two">
+            <h1 class="crew-name">Crew Two</h1>
+            <br>
+            <label for="crew-two-name">Name:</label>
+            <br>
+            <input oninput="updatePreviews()" type="text" id="crew-two-name" placeholder="Crew Name" autocomplete="off">
+            <br><br>
+            <label for="crew-two-members">Members:</label>
+            <br>
+            <textarea oninput="updatePreviews()" id="crew-two-members" placeholder="Enter each member line by line"></textarea>
         </div>
-      </div>
+
+        <div id="setup-preview">
+            <h1>Preview</h1>
+            <div id="setup-preview-crew-one" class="setup-preview-crew">
+                <div class="preview-team">No Name</div>
+                <hr>
+                <div class="preview-entry">No Players</div>
+            </div>
+            <div id="setup-preview-crew-two" class="setup-preview-crew">
+                <div class="preview-team">No Name</div>
+                <hr>
+                <div class="preview-entry">No Players</div>
+            </div>
+        </div>
+
+        <div id="setup-controls">
+            <h1>Controls</h1>
+            <div id="setup-controls-buttons">
+                <input id="setup-submit" type="button" value="Start" onclick="startCrewBattle()">
+                <input id="setup-reset" type="button" value="Reset" onclick="resetCrewBattle()">
+            </div>
+            <br>
+            <div id="setup-error">error message</div>
+        </div>
     </div>
 
-    <div class="list container nav justify-content-center">
-    <div class="row heading nav-tabs nav-justified">
-        <div class="nav-item nav-link col-md-4 col-sm-4">
-          <h1>Crew Two: </h1>
+    <div id="battle" class="page">
+        <h1 class="page-header">Crew Battle Maker</h1>
+        <div id="battle-crew-one" class="crew one">
+            <h1 id="battle-crew-one-name" class="crew-name">Crew One</h1>
+            <hr>
+            <div id="battle-crew-one-members" class="crew-members"></div>
+            <hr>
+            <div class='battle-stock-controls'>
+                <input type="button" value="- Player" onclick="Crew.team1.killActivePlayer();u()">
+                <input type="button" value="- Stock" onclick="Crew.team1.subtractStocks(1);u()">
+                <input type="button" value="+ Stock" onclick="Crew.team1.addStocks(1);u()">
+            </div>
         </div>
-          
-        <div class="nav-item nav-link col-md-4 col-sm-4 ">
-          <label for="CrewName2">Name: </label>
-          <input type="text"  id="CrewName2" placeholder="Crew Name" autocomplete="off">
+        <div id="battle-crew-two" class="crew two">
+            <h1 id="battle-crew-two-name" class="crew-name">Crew Two</h1>
+            <hr>
+            <div id="battle-crew-two-members" class="crew-members"></div>
+            <hr>
+            <div class='battle-stock-controls'>
+                <input type="button" value="- Player" onclick="Crew.team2.killActivePlayer();u()">
+                <input type="button" value="- Stock" onclick="Crew.team2.subtractStocks(1);u()">
+                <input type="button" value="+ Stock" onclick="Crew.team2.addStocks(1);u()">
+            </div>
         </div>
-
-        <div class="nav-item nav-link col-md-4 col-sm-4 ">
-          <label for="Members2">Members: </label>
-      <textarea id="Members2" placeholder="Enter each member line by line"></textarea>
-        </div>
-      </div>
-    </div>
-    <div class="list container nav justify-content-center">
-    <div class="row heading nav-tabs nav-justified">
-        <div class="nav-item nav-link col-md-6 col-sm-6 tab" data-toggle="tab">
-          <button class="btn btn-primary">Submit</button>
-        </div>
-          
-        <div class="nav-item nav-link col-md-6 col-sm-6 tab">
-          <button class="btn btn-danger">Reset</button>
-        </div>
-      </div>
-    </div>
-    <div class="error-message nav justify-content-center"></div>
-    <div class="error-message1 nav justify-content-center"></div>
-    <div class="error-message2 nav justify-content-center"></div>
-    <div class="nav justify-content-center"><a class="new-link" href=""></a></div>
-
-    <div class="preview nav justify-content-center">
-      <h3>Preview</h3>
-      TBD
-    </div>
-  </div>
-
-
-
-
-
-    <div id="Page2" style="display:none">
-  <div class="col container-fluid nav justify-content-center">
-        <div class="justify-content-center col-md-3 col-sm-3">
-          <div class="text-center"><h1 class="Team1">Crew One: </h1>
-          <div class="Crewbattle-crew1">
-          
-          </div>
-          <br>
-          <div>
-            <button class="increment1">+</button>
-            <button class="decrement1">-</button>
-          </div>
-        </div>
-        </div>
-          
-        <div class="nav justify-content-center col-md-1 col-sm-1">
-          <h1 class=" c1score"></h1>
-        </div>
-        <div class="nav justify-content-center col-md-1 col-sm-1 ">
-          <h1 class="player player1"></h1>
-          <div class="stocks stocks1"></div>
-        </div>
-        <div class="nav justify-content-center col-md-1 col-sm-1 ">
-
-        </div>
-        <div class="nav justify-content-center col-md-1 col-sm-1 ">
-          <h1 class="player player2"></h1>
-          <div class="stocks stocks2"></div>
-        </div>
-        <div class="nav justify-content-center col-md-1 col-sm-1">
-          <h1 class=" c2score"></h1>
-        </div>
-
-       <div class="justify-content-center col-md-3 col-sm-3">
-          <div class="text-center"><h1 class="Team2">Crew Two: </h1>
-          <div class="Crewbattle-crew2">
-          
-          </div>
-          <br>
-          <div>
-            <button class="increment2"><strong>+</strong></button>
-            <button class="decrement2">-</button>
-          </div>
-        </div>
+        <div id="mini-box">
+            <div id="mini-player-one" class='mini-player one' data-value="2">player 1</div>
+            <div id="mini-name-one" class='mini-name one' data-value="5">Crew One</div>
+            <div id="mini-player-two" class='mini-player two' data-value='3'>player 2</div>
+            <div id="mini-name-two" class='mini-name two' data-value="99">Crew Two</div>
         </div>
     </div>
-    <div class="text-center cb-log"></div>
-</div>
 </body>
-<script>
-  var num=1;
-  var log= [];
-  document.querySelector(".increment2").onclick= function(){
-    var score = document.querySelector(".c2score").innerHTML;
-    score++;
-    console.log(score);
-    document.querySelector(".c2score").innerHTML= score.toString();
-  }
-  document.querySelector(".increment1").onclick= function(){
-    var score = document.querySelector(".c1score").innerHTML;
-    score++;
-    console.log(score);
-    document.querySelector(".c1score").innerHTML= score.toString();
-  }
-  document.querySelector(".decrement2").onclick= function(){
-    
-    if (log[log.length-1]==1) {
-      num++;
 
-      document.querySelector(".newStat").innerHTML = document.getElementById("CrewName1").value+ " has taken "+ num +" stock(s)!";
-    }
-    else{
-      num=1;
-      if (document.querySelector(".newStat") == null) {
-      document.querySelector(".cb-log").innerHTML=document.querySelector(".cb-log").innerHTML+"<div class='newStat'></div>";
-      document.querySelector(".newStat").innerHTML = document.getElementById("CrewName1").value+ " has taken "+ num +" stock(s)!";  
-      }
-      else{
-        document.querySelector(".newStat").className = "oldStat";
-        document.querySelector(".cb-log").innerHTML=document.querySelector(".cb-log").innerHTML+"<div class='newStat'></div>";
-        document.querySelector(".newStat").innerHTML = document.getElementById("CrewName1").value+ " has taken "+ num +" stock(s)!";
-      }
-      
-
-      
-    }
-    log.push(1);
-    console.log(log);
-    
-
-    //messess with the scores
-    var score = document.querySelector(".c2score").innerHTML;
-    score--;
-    console.log(score);
-    document.querySelector(".c2score").innerHTML= score.toString();
-    if (score==0) {
-      alert(document.getElementById("CrewName1").value +" has WON!!!")
-      document.querySelector(".decrement1").disabled = true;
-      document.querySelector(".decrement2").disabled = true;
-      document.querySelector(".increment2").disabled = true;
-      document.querySelector(".increment1").disabled = true;
-    }
-  }
-  document.querySelector(".decrement1").onclick= function(){
-    if (log[log.length-1]==0) {
-      num++;
-
-      document.querySelector(".newStat").innerHTML = document.getElementById("CrewName2").value+ " has taken "+ num +" stock(s)!";
-    }
-    else{
-      num=1;
-      if (document.querySelector(".newStat") == null) {
-      document.querySelector(".cb-log").innerHTML=document.querySelector(".cb-log").innerHTML+"<div class='newStat'></div>";
-      document.querySelector(".newStat").innerHTML = document.getElementById("CrewName2").value+ " has taken "+ num +" stock(s)!";  
-      }
-      else{
-        document.querySelector(".newStat").className = "oldStat";
-        document.querySelector(".cb-log").innerHTML=document.querySelector(".cb-log").innerHTML+"<div class='newStat'></div>";
-        document.querySelector(".newStat").innerHTML = document.getElementById("CrewName2").value+ " has taken "+ num +" stock(s)!";
-      }
-    }
-    log.push(0);
-    
-    var score = document.querySelector(".c1score").innerHTML;
-    score--;
-    console.log(score);
-    document.querySelector(".c1score").innerHTML= score.toString();
-    if (score==0) {
-      alert(document.getElementById("CrewName2").value +" has WON!!!");
-      document.querySelector(".decrement1").disabled = true;
-      document.querySelector(".decrement2").disabled = true;
-      document.querySelector(".increment2").disabled = true;
-      document.querySelector(".increment1").disabled = true;
-    }
-  }
-
-
-  
-  document.querySelector('.btn-primary').onclick = function(){
-    document.querySelector(".new-link").innerHTML = '';
-    var errors=0;
-    document.querySelector(".error-message").innerHTML = "";
-    document.querySelector(".error-message1").innerHTML = "";
-    document.querySelector(".error-message2").innerHTML = "";
-    if(document.getElementById("Members1").value == '' || document.getElementById("Members2").value ==''){
-      document.querySelector(".error-message").innerHTML = "There are no member in the crew(s).";
-      errors++;
-    }
-
-
-    if(document.getElementById("CrewName1").value=='' || document.getElementById("CrewName2").value==''){
-      document.querySelector(".error-message1").innerHTML = "Crew Name(s) is/are empty.";
-      errors++;
-    }
-    var lines = document.getElementById("Members1").value.split('\n'); //fix inner method when back
-    
-    var crew1 = document.getElementById("Members1").value.split('\n');
-    var crew2 = document.getElementById("Members2").value.split('\n');
-    if(crew1.length!=crew2.length){
-      document.querySelector(".error-message2").innerHTML = "There are an uneven amount of crewmembers.";
-      errors++;
-    }
-    console.log(errors);
-    if (Boolean(errors>0)) {
-      console.log("errors found");
-      return;
-    }
-    else{
-      document.querySelector(".new-link").innerHTML = "Click here to start the battle!";
-    }
-    console.log("Success");
-    
-  }
-  document.querySelector('.btn-danger').onclick = function clear(){
-    document.getElementById("Members1").value = '';
-    document.getElementById("Members2").value ='';
-    document.getElementById("CrewName1").value='';
-    document.getElementById("CrewName2").value='';
-
-    document.querySelector(".error-message").innerHTML = "";
-    document.querySelector(".error-message1").innerHTML = "";
-    document.querySelector(".error-message2").innerHTML = "";
-
-  }
-function show(shown, hidden) {
-      document.getElementById(shown).style.display='block';
-      document.getElementById(hidden).style.display='none';
-      return false;
-    }
-document.querySelector(".new-link").onclick = function(){//When you click the href link to start the crewbattle
-
-    var crew1 = document.getElementById("Members1").value.split('\n');
-    var crew2 = document.getElementById("Members2").value.split('\n');
-    c1stocks = crew1.length *3;
-    c2stocks = crew2.length *3;
-    document.querySelector('.c1score').innerHTML = c1stocks.toString();
-    document.querySelector('.c2score').innerHTML = c2stocks.toString();
-    document.querySelector('.Team1').innerHTML = document.getElementById("CrewName1").value;
-    document.querySelector('.Team2').innerHTML = document.getElementById("CrewName2").value;
-    document.querySelector('.player1').innerHTML = document.getElementById("CrewName1").value;
-    document.querySelector('.player2').innerHTML = document.getElementById("CrewName2").value;
-
-    for (var i = 0; i<crew1.length; i++) {
-      document.querySelector('.Crewbattle-crew1').innerHTML = document.querySelector('.Crewbattle-crew1').innerHTML + "<div class='Crewmember1."+i+"'>"+crew1[i]+": <select name='from1'><option value>Random</option><option value='Banjo-&-Kazooie'>Banjo & Kazooie</option><option value='Bayonetta'>Bayonetta</option><option value='Bowser'>Bowser</option><option value='Bowser-Jr'>Bowser Jr.</option><option value='Byleth'>Byleth</option><option value='Captain-Falcon'>Captain Falcon</option><option value='Chrom'>Chrom</option><option value='Cloud'>Cloud</option><option value='Corrin'>Corrin</option><option value='Daisy'>Daisy</option><option value='Dark-Pit'>Dark Pit</option><option value='Dark-Samus'>Dark Samus</option><option value='Diddy-Kong'>Diddy Kong</option><option value='Donkey-Kong'>Donkey Kong</option><option value='Dr-Mario'>Dr Mario</option><option value='Duck-Hunt'>Duck Hunt</option><option value='Falco'>Falco</option><option value='Fox'>Fox</option><option value='Ganondorf'>Ganondorf</option><option value='Greninja'>Greninja</option><option value='Hero'>Hero</option><option value='Ice-Climbers'>Ice Climbers</option><option value='Incineroar'>Incineroar</option><option value='Inkling'>Inkling</option><option value='Ike'>Ike</option><option value='Isabelle'>Isabelle</option><option value='Jigglypuff'>Jigglypuff</option><option value='Joker'>Joker</option><option value='Ken'>Ken</option><option value='King-DeDeDe'>King DeDeDe</option><option value='King-K-Rool'>King K Rool</option><option value='Kirby'>Kirby</option><option value='Link'>Link</option><option value='Little-Mac'>Little Mac</option><option value='Lucario'>Lucario</option><option value='Lucas'>Lucas</option><option value='Lucina'>Lucina</option><option value='Luigi'>Luigi</option><option value='Mario'>Mario</option><option value='Marth'>Marth</option><option value='Mega-Man'>Mega Man</option><option value='Meta-Knight'>Meta Knight</option><option value='Mewtwo'>Mewtwo</option><option value='Mii-Fighter'>Mii Fighter</option><option value='Min-Min'>Min Min</option><option value='Mr-Game-&-Watch'>Mr Game & Watch</option><option value='Ness'>Ness</option><option value='Olimar'>Olimar</option><option value='Pac-Man'>Pac Man</option><option value='Palutena'>Palutena</option><option value='Peach'>Peach</option><option value='Pichu'>Pichu</option><option value='Pikachu'>Pikachu</option><option value='Piranha Plant'>Piranha Plant</option><option value='Pit'>Pit</option><option value='Pokemon-Trainer'>Pokemon Trainer</option><option value='Pyra-Mythra'>Pyra/Mythra</option><option value='Richter'>Richter</option><option value='ROB'>ROB</option><option value='Robin'>Robin</option><option value='Rosalina'>Rosalina</option><option value='Roy'>Roy</option><option value='Ryu'>Ryu</option><option value='Samus'>Samus</option><option value='Sephiroth'>Sephiroth</option><option value='Sheik'>Sheik</option><option value='Shulk'>Shulk</option><option value='Simon'>Simon</option><option value='Snake'>Snake</option><option value='Sonic'>Sonic</option><option value='Steve'>Steve</option><option value='Terry'>Terry</option><option value='Toon Link'>Toon Link</option><option value='Villager'>Villager</option><option value='Wario'>Wario</option><option value='Wii-Fit-Trainer'>Wii Fit Trainer</option><option value='Wolf'>Wolf</option><option value='Yoshi'>Yoshi</option><option value='Young-Link'>Young Link</option><option value='Zelda'>Zelda</option><option value='Zero-Suit-Samus'>Zero Suit Samus</option></select></div>";
-    }
-    for (var i = 0; i<crew2.length; i++) {
-      document.querySelector('.Crewbattle-crew2').innerHTML = document.querySelector('.Crewbattle-crew2').innerHTML + "<div class='Crewmember2."+i+"'>"+crew2[i]+": <select name='from1'><option value>Random</option><option value='Banjo-&-Kazooie'>Banjo & Kazooie</option><option value='Bayonetta'>Bayonetta</option><option value='Bowser'>Bowser</option><option value='Bowser-Jr'>Bowser Jr.</option><option value='Byleth'>Byleth</option><option value='Captain-Falcon'>Captain Falcon</option><option value='Chrom'>Chrom</option><option value='Cloud'>Cloud</option><option value='Corrin'>Corrin</option><option value='Daisy'>Daisy</option><option value='Dark-Pit'>Dark Pit</option><option value='Dark-Samus'>Dark Samus</option><option value='Diddy-Kong'>Diddy Kong</option><option value='Donkey-Kong'>Donkey Kong</option><option value='Dr-Mario'>Dr Mario</option><option value='Duck-Hunt'>Duck Hunt</option><option value='Falco'>Falco</option><option value='Fox'>Fox</option><option value='Ganondorf'>Ganondorf</option><option value='Greninja'>Greninja</option><option value='Hero'>Hero</option><option value='Ice-Climbers'>Ice Climbers</option><option value='Incineroar'>Incineroar</option><option value='Inkling'>Inkling</option><option value='Ike'>Ike</option><option value='Isabelle'>Isabelle</option><option value='Jigglypuff'>Jigglypuff</option><option value='Joker'>Joker</option><option value='Ken'>Ken</option><option value='King-DeDeDe'>King DeDeDe</option><option value='King-K-Rool'>King K Rool</option><option value='Kirby'>Kirby</option><option value='Link'>Link</option><option value='Little-Mac'>Little Mac</option><option value='Lucario'>Lucario</option><option value='Lucas'>Lucas</option><option value='Lucina'>Lucina</option><option value='Luigi'>Luigi</option><option value='Mario'>Mario</option><option value='Marth'>Marth</option><option value='Mega-Man'>Mega Man</option><option value='Meta-Knight'>Meta Knight</option><option value='Mewtwo'>Mewtwo</option><option value='Mii-Fighter'>Mii Fighter</option><option value='Min-Min'>Min Min</option><option value='Mr-Game-&-Watch'>Mr Game & Watch</option><option value='Ness'>Ness</option><option value='Olimar'>Olimar</option><option value='Pac-Man'>Pac Man</option><option value='Palutena'>Palutena</option><option value='Peach'>Peach</option><option value='Pichu'>Pichu</option><option value='Pikachu'>Pikachu</option><option value='Piranha Plant'>Piranha Plant</option><option value='Pit'>Pit</option><option value='Pokemon-Trainer'>Pokemon Trainer</option><option value='Pyra-Mythra'>Pyra/Mythra</option><option value='Richter'>Richter</option><option value='ROB'>ROB</option><option value='Robin'>Robin</option><option value='Rosalina'>Rosalina</option><option value='Roy'>Roy</option><option value='Ryu'>Ryu</option><option value='Samus'>Samus</option><option value='Sephiroth'>Sephiroth</option><option value='Sheik'>Sheik</option><option value='Shulk'>Shulk</option><option value='Simon'>Simon</option><option value='Snake'>Snake</option><option value='Sonic'>Sonic</option><option value='Steve'>Steve</option><option value='Terry'>Terry</option><option value='Toon Link'>Toon Link</option><option value='Villager'>Villager</option><option value='Wario'>Wario</option><option value='Wii-Fit-Trainer'>Wii Fit Trainer</option><option value='Wolf'>Wolf</option><option value='Yoshi'>Yoshi</option><option value='Young-Link'>Young Link</option><option value='Zelda'>Zelda</option><option value='Zero-Suit-Samus'>Zero Suit Samus</option></select></div>";
-    }
-    return show('Page2','Page1');
-  }
-</script>
 </html>
